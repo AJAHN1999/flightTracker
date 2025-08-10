@@ -32,6 +32,15 @@ def retrieveAirportName(airportName: str):
     print(cur.fetchall())
     return json.dumps(list_of_dicts)
 
+@app.get("/AllAirports")
+def retrieveAllAirports ():
+    cur.execute("SELECT * FROM airports")
+    list_of_dicts = [{'icao':everyResult[0],'country_code':everyResult[1],'region_name':everyResult[2],'iata':everyResult[3],'airport':everyResult[4],'latitude':everyResult[5],'longitude':everyResult[6]} for everyResult in cur.fetchall()]
+    print(cur.fetchall())
+    return json.dumps(list_of_dicts)
+
+
+
 
 @app.get("/")
 def retrieveAirplanes(bbox:tuple):
